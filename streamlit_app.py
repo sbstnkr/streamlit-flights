@@ -3,6 +3,7 @@ from google.cloud import firestore
 from google.oauth2 import service_account
 import json
 import pandas as pd
+import altair as alt
 
 
 key_dict = json.loads(st.secrets["textkey"])
@@ -19,4 +20,10 @@ df = df[['date', 'city', 'price']]
 
 print(df)
 
-st.line_chart(data=df, x='date', y='price')
+c = alt.Chart(df).mark_circle().encode(
+    x='date', y='price', size='city', color='city'
+)
+
+st.altair_chart(c, use_container_width=Treu)
+
+#st.line_chart(data=df, x='date', y='price')
