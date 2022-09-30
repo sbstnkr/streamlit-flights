@@ -20,7 +20,7 @@ df = df[['date', 'city', 'price']]
 
 print(df)
 
-c = alt.Chart(df).mark_circle().encode(
+c = alt.Chart(df).mark_line().encode(
     x='date', y='price', size='city', color='city'
 )
 
