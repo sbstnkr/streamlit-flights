@@ -17,4 +17,4 @@ for doc in db.collection("flights").stream():
 df = pd.json_normalize(flights, record_path=['cities'], meta='date')
 df = df[['date', 'city', 'price']]
 
-st.line_chart(data=df)
+st.line_chart(data=df['price'], x=df['date'], y=df['city'])
