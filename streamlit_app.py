@@ -7,6 +7,6 @@ key_dict = json.loads(st.secrets["textkey"])
 creds = service_account.Credentials.from_service_account_info(key_dict)
 db = firestore.Client(credentials=creds)
 
-posts_ref = db.collection("flights")
+flights = {doc.id: doc.to_dict() for doc in db.collection("flights").stream()}
 
-st.write({doc.id: doc.to_dict() for doc in posts_ref.stream()})
+st.line_chart(data=flights)
