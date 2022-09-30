@@ -13,4 +13,4 @@ flights = [{'date': doc.id,
 
 print(pd.DataFrame.from_records(flights))
 
-st.line_chart(data=flights)
+st.line_chart(data=pd.DataFrame.from_records(flights))
