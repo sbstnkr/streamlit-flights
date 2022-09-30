@@ -24,6 +24,6 @@ c = alt.Chart(df).mark_circle().encode(
     x='date', y='price', size='city', color='city'
 )
 
-st.altair_chart(c, use_container_width=Treu)
+st.altair_chart(c, use_container_width=True)
 
 #st.line_chart(data=df, x='date', y='price')
