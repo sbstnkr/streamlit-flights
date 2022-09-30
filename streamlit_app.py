@@ -21,7 +21,7 @@ df = df[['date', 'city', 'price']]
 print(df)
 
 c = alt.Chart(df).mark_line().encode(
-    x='date', y='price', size='city', color='city'
+    x='date', y='price', size='city', color='city', tooltip=['price', 'city', 'date']
 )
 
 st.altair_chart(c, use_container_width=True)
