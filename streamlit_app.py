@@ -4,13 +4,16 @@ from google.oauth2 import service_account
 import json
 import pandas as pd
 
+
 key_dict = json.loads(st.secrets["textkey"])
 creds = service_account.Credentials.from_service_account_info(key_dict)
 db = firestore.Client(credentials=creds)
 
-flights = [{'date': doc.id,
-            'data': doc.to_dict()} for doc in db.collection("flights").stream()]
+flights = []
+for doc in db.collection("flights").stream():
+    flights.append({'date': doc.id,
+                    'cities': doc.get('cities')})
 
-print(pd.DataFrame.from_records(flights))
+df = pd.json_normalize(flights, record_path=['cities'], meta='date')
 
-st.line_chart(data=pd.DataFrame.from_records(flights))
+st.line_chart(data=df, x='date', y=['city', 'price'])
