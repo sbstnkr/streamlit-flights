@@ -9,6 +9,4 @@ db = firestore.Client(credentials=creds)
 
 posts_ref = db.collection("flights")
 
-for doc in posts_ref.stream():
-    st.write("The id is: ", doc.id)
-    st.write("The contents are: ", doc.to_dict())
+st.write(posts_ref.stream())
