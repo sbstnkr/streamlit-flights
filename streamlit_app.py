@@ -18,7 +18,7 @@ for doc in db.collection("flights").stream():
 df = pd.json_normalize(flights, record_path=['cities'], meta='date')
 df = df[['date', 'city', 'price']]
 
-df['date'] = pd.to_datetime(df['date'])
+df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y')
 print(df)
 
 def get_chart(data):
