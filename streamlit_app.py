@@ -18,6 +18,7 @@ for doc in db.collection("flights").stream():
 df = pd.json_normalize(flights, record_path=['cities'], meta='date')
 df = df[['date', 'city', 'price']]
 
+df['date'] = pd.to_datetime(df['date'])
 print(df)
 
 def get_chart(data):
@@ -63,5 +64,3 @@ def get_chart(data):
 chart = get_chart(df)
 
 st.altair_chart(chart, use_container_width=True)
-
-#st.line_chart(data=df, x='date', y='price')
